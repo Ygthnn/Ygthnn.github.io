@@ -1,30 +1,38 @@
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Ubuntu",  sans-serif;
-  --nav-font: "Nunito",  sans-serif;
-}
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Ubuntu", sans-serif;
+  --nav-font: "Nunito", sans-serif;
 
-/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
+  /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
   --background-color: #1f1f1f; /* Background color for the entire website, including individual sections */
   --default-color: #ffffff; /* Default color used for the majority of the text content across the entire website */
   --heading-color: #ffffff; /* Color for headings, subheadings and title throughout the website */
   --accent-color: #ececec; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #232323; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #440808; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
-}
 
-/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
-:root {
-  --nav-color: rgba(236, 236, 236, 0.59);  /* The default color of the main navmenu links */
+  /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+  --nav-color: rgba(236, 236, 236, 0.59); /* The default color of the main navmenu links */
   --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #393939; /* Used as the background color for mobile navigation menu */
   --nav-dropdown-background-color: #393939; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #ffffff; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #ececec; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+
+  /* Spacing scale and content block styling */
+  --space-1: 0.5rem;    /* tight */
+  --space-2: 1rem;      /* base */
+  --space-3: 1.25rem;   /* comfortable */
+  --space-4: 2rem;      /* roomy */
+  --space-5: 3.5rem;    /* generous */
+  --card-radius: 12px;
+  --card-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  --surface-contrast: rgba(255,255,255,0.03);
+
+  scroll-behavior: smooth;
 }
 
-/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the same color scheme. */
 
 .light-background {
   --background-color: #2c2c2c;
@@ -37,11 +45,6 @@
   --heading-color: #ffffff;
   --surface-color: #151f2b;
   --contrast-color: #ffffff;
-}
-
-/* Smooth scroll */
-:root {
-  scroll-behavior: smooth;
 }
 
 /*--------------------------------------------------------------
@@ -64,27 +67,17 @@ a:hover {
   text-decoration: none;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
 }
 
-/* Spacing scale and content block styling (inspired by main.css)
-   - Provides a consistent spacing scale used across sections
-   - Card-like surfaces for clear visual hierarchy (radius, border, shadow)
-*/
-:root {
-  --space-1: 0.5rem;    /* tight */
-  --space-2: 1rem;      /* base */
-  --space-3: 1.25rem;   /* comfortable */
-  --space-4: 2rem;      /* roomy */
-  --space-5: 3.5rem;    /* generous */
-  --card-radius: 12px;
-  --card-shadow: 0 10px 30px rgba(0,0,0,0.45);
-  --surface-contrast: rgba(255,255,255,0.03);
-}
-
-/* Apply consistent vertical spacing to major sections (used by #about, #services, #portfolio, #resume) */
+/* Apply consistent vertical spacing to major sections */
 .section {
   padding-top: var(--space-4);
   padding-bottom: var(--space-4);
@@ -99,10 +92,15 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 /* Section title spacing (consistent gaps between title and content) */
-.section-title { margin-bottom: var(--space-3); }
-.section-title h2 { margin-bottom: var(--space-2); }
+.section-title {
+  margin-bottom: var(--space-3);
+}
 
-/* Card utility and surface styling (applies across About, Services, Portfolio, Resume) */
+.section-title h2 {
+  margin-bottom: var(--space-2);
+}
+
+/* Card utility and surface styling (applies across About, Services, Portfolio, Resume, Contact) */
 .card-like,
 .profile-card,
 .service-card,
@@ -132,26 +130,65 @@ h1,h2,h3,h4,h5,h6 {
 
 /* Small internal spacing adjustments */
 .profile-card .profile-content,
-.resume-side { padding: var(--space-2) 0 0 0; }
-.portfolio-wrap img { border-radius: 10px; display: block; width: 100%; height: auto; }
-.service-card .service-icon { font-size: 28px; margin-bottom: var(--space-2); }
-.media-card figure { margin: 0; }
+.resume-side {
+  padding: var(--space-2) 0 0 0;
+}
+
+.portfolio-wrap img {
+  border-radius: 10px;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.service-card .service-icon {
+  font-size: 28px;
+  margin-bottom: var(--space-2);
+}
+
+.media-card figure {
+  margin: 0;
+}
 
 /* Apply the spacing scale to specific sections for consistent rhythm */
-#about .about-content { gap: var(--space-3); }
-#services .row { gap: var(--space-3); }
-#portfolio .portfolio-container { gap: var(--space-3); }
-#resume .resume-section { margin-bottom: var(--space-3); }
+#about .about-content {
+  gap: var(--space-3);
+}
+
+#services .row {
+  gap: var(--space-3);
+}
+
+#portfolio .portfolio-container {
+  gap: var(--space-3);
+}
+
+#resume .resume-section {
+  margin-bottom: var(--space-3);
+}
 
 /* Slightly reduce paddings on narrow screens */
 @media (max-width: 768px) {
-  .card-like { padding: var(--space-2); }
+  .card-like {
+    padding: var(--space-2);
+  }
 }
 
 /* Accessibility: visible focus when interacting with interactive card content */
-.card-like:focus-within { outline: 3px solid color-mix(in srgb, var(--accent-color), black 20%); outline-offset: 4px; }
+.card-like:focus-within {
+  outline: 3px solid color-mix(in srgb, var(--accent-color), black 20%);
+  outline-offset: 4px;
+}
 
-.section .container { padding-left: var(--space-2); padding-right: var(--space-2); }
+/* Section container padding */
+.section .container {
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+/*--------------------------------------------------------------
+# Header / Navbar base
+--------------------------------------------------------------*/
 
 .header .header-container {
   border-radius: 10px;
@@ -160,7 +197,393 @@ h1,h2,h3,h4,h5,h6 {
   border: 3px solid color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
-.navmenu .dropdown>.dropdown-active {
+/* Keep dropdown-active visible */
+.navmenu .dropdown > .dropdown-active {
   display: block;
   background-color: rgba(33, 37, 41, 0.03);
+}
+
+/*--------------------------------------------------------------
+# Navbar Restyle (appearance only)
+--------------------------------------------------------------*/
+
+.header {
+  padding: 1.5rem 0;
+}
+
+.header .header-container {
+  background: radial-gradient(circle at top left, #2b2b2b 0%, #161616 55%, #0b0b0b 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  padding: 1.5rem 1.25rem;
+}
+
+/* Vertical nav menu with pill-like items */
+.navmenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.navmenu a {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--nav-color);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+/* Icon styling */
+.navmenu a .navicon {
+  font-size: 1.05rem;
+  opacity: 0.8;
+}
+
+/* Active / hover states with subtle pill highlight */
+.navmenu a:hover,
+.navmenu a.active {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  color: var(--nav-hover-color);
+  transform: translateX(2px);
+}
+
+.navmenu a:hover .navicon,
+.navmenu a.active .navicon {
+  opacity: 1;
+}
+
+/* Animated accent bar on the left */
+.navmenu a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border-left: 3px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.navmenu a.active::before,
+.navmenu a:hover::before {
+  border-left-color: color-mix(in srgb, var(--accent-color), transparent 25%);
+}
+
+/* Dropdown submenu styling (keeps functionality, changes look) */
+.navmenu .dropdown > a {
+  justify-content: space-between;
+}
+
+.navmenu .dropdown ul {
+  padding-left: 0;
+  margin-top: 0.4rem;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navmenu .dropdown ul li a {
+  padding: 0.5rem 0.9rem;
+  border-radius: 0;
+  font-size: 0.9rem;
+}
+
+.navmenu .dropdown ul li a:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile nav: keep it readable and full-width */
+@media (max-width: 991px) {
+  .header .header-container {
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--nav-mobile-background-color);
+  }
+
+  .navmenu ul {
+    gap: 0.2rem;
+  }
+
+  .navmenu a {
+    border-radius: 10px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Progress Bars Restyle (Skills + Resume)
+--------------------------------------------------------------*/
+
+.skills .progress,
+.resume-side .progress {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.skills .progress-bar,
+.resume-side .progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background-image: linear-gradient(
+    90deg,
+    #6ee7ff,
+    #8b5cf6,
+    #ec4899
+  );
+  background-size: 200% 100%;
+  animation: skill-bar-move 3s linear infinite;
+  position: relative;
+}
+
+/* Optional subtle shine overlay */
+.skills .progress-bar::after,
+.resume-side .progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.35),
+    transparent 45%
+  );
+  pointer-events: none;
+}
+
+/* Animation keyframes */
+@keyframes skill-bar-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Make skill labels look a bit tighter with the new bars */
+.skills .skill-item h4,
+.resume-side .skill-item span:first-child {
+  font-size: 0.95rem;
+}
+
+/* Slightly smaller percentage text to match */
+.skills .skill-percentage,
+.resume-side .skill-item span:last-child {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/*--------------------------------------------------------------
+# Styled Lists (pseudo-elements & counters)
+--------------------------------------------------------------*/
+
+/* 1) Unordered list style: used for project bullet points inside resume-section */
+.resume-section ul {
+  list-style: none;
+  padding-left: 1.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.resume-section ul > li {
+  position: relative;
+  padding-left: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+/* Custom bullet using pseudo-element */
+.resume-section ul > li::before {
+  content: "▹";
+  position: absolute;
+  left: -1.1rem;
+  top: 0.1rem;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--accent-color), #00e1ff 40%);
+}
+
+/* Nested list inside resume-section (e.g., extra details under a bullet) */
+.resume-section ul ul {
+  margin-top: 0.25rem;
+  margin-bottom: 0.35rem;
+  padding-left: 1.2rem;
+}
+
+.resume-section ul ul > li::before {
+  content: "•";
+  font-size: 0.7rem;
+  top: 0.25rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* 2) Ordered list with counters – use: <ol class="numbered-list"> ... */
+.numbered-list {
+  counter-reset: main-counter;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.numbered-list > li {
+  counter-increment: main-counter;
+  position: relative;
+  padding-left: 2.6rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Main counter pill */
+.numbered-list > li::before {
+  content: counter(main-counter, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: linear-gradient(135deg, #6ee7ff, #8b5cf6);
+  color: #060b10;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+}
+
+/* Nested ordered list inside numbered-list to demonstrate nested counters:
+   <ol class="numbered-list">
+      <li>Item
+         <ol>
+            <li>Sub item</li>
+         </ol>
+      </li>
+   </ol>
+*/
+.numbered-list > li > ol {
+  counter-reset: sub-counter;
+  list-style: none;
+  margin-top: 0.4rem;
+  padding-left: 0;
+}
+
+.numbered-list > li > ol > li {
+  counter-increment: sub-counter;
+  position: relative;
+  padding-left: 2.6rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Nested counter uses "1.1", "1.2", etc. */
+.numbered-list > li > ol > li::before {
+  content: counter(main-counter) "." counter(sub-counter);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 2.1rem;
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent-color), #00e1ff 25%);
+}
+
+/*--------------------------------------------------------------
+# Tables / Data Blocks
+--------------------------------------------------------------*/
+
+/* Generic styled table – use <table class="data-table"> */
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  background-color: var(--surface-color);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+/* Header row */
+table.data-table thead {
+  background: linear-gradient(135deg, #2f2f2f, #1f1f1f);
+}
+
+table.data-table thead th {
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+/* Body cells */
+table.data-table tbody td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Zebra striping */
+table.data-table tbody tr:nth-child(odd) {
+  background-color: rgba(255,255,255,0.02);
+}
+
+table.data-table tbody tr:nth-child(even) {
+  background-color: rgba(0,0,0,0.12);
+}
+
+/* Row hover */
+table.data-table tbody tr:hover {
+  background-color: rgba(255,255,255,0.07);
+}
+
+/* Text alignment: text left, numbers right */
+table.data-table th,
+table.data-table td {
+  text-align: left;
+}
+
+/* Mark numeric cells with class="num" for right alignment */
+table.data-table th.num,
+table.data-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Optional small caption */
+table.data-table caption {
+  caption-side: top;
+  padding: 0.4rem 0.2rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+@media (max-width: 991px) {
+  .header {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .header .header-container {
+    height: auto;
+    border-radius: 0;
+  }
+
+  .main,
+  #footer {
+    margin-left: 0;
+  }
 }
