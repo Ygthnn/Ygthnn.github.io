@@ -587,3 +587,435 @@ table.data-table caption {
     margin-left: 0;
   }
 }
+
+/*--------------------------------------------------------------
+# Custom Animations & Effects
+--------------------------------------------------------------*/
+
+/* ANIMATION 1: Fade-in sections with slide-up on page load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ANIMATION 2: Subtle floating effect for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* ANIMATION 3: Glow pulse for interactive elements */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 5px rgba(110, 231, 255, 0.3), inset 0 0 5px rgba(110, 231, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(110, 231, 255, 0.6), inset 0 0 10px rgba(110, 231, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(110, 231, 255, 0.3), inset 0 0 5px rgba(110, 231, 255, 0.1);
+  }
+}
+
+/* ANIMATION 4: Rotating circular loader (spinner) */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ANIMATION 5: Pulsing dots loader */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* ANIMATION 6: Shimmer/shine effect for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* ANIMATION 7: Gradient shift background */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ANIMATION 8: Rotate + scale on hover for buttons */
+@keyframes buttonHover {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.05) rotate(3deg);
+  }
+}
+
+/*--------------------------------------------------------------
+# CSS-Only Loader / Spinner
+--------------------------------------------------------------*/
+
+/* Pulsing dots loader (can be used as preloader or decorative) */
+.loader {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6ee7ff, #8b5cf6);
+  animation: pulse 1.4s infinite;
+}
+
+.loader-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Circular spinner loader (rotating) */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(110, 231, 255, 0.2);
+  border-top: 4px solid #6ee7ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Large spinner for preloader screen */
+.preloader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(110, 231, 255, 0.15);
+  border-top: 6px solid #6ee7ff;
+  border-right: 6px solid #8b5cf6;
+  border-radius: 50%;
+  animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+/*--------------------------------------------------------------
+# Preload / Loading Animation (before page fully loads)
+--------------------------------------------------------------*/
+
+/* Optional: Preload animation container – applies fade-in to sections */
+[data-aos] {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Stagger animations for multiple elements */
+[data-aos]:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+[data-aos]:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+[data-aos]:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+[data-aos]:nth-child(n+4) {
+  animation-delay: calc((var(--index, 0) + 1) * 0.1s);
+}
+
+/*--------------------------------------------------------------
+# Animated Gradient Background (Body & Sections)
+--------------------------------------------------------------*/
+
+/* Optional animated gradient background for hero or full page */
+.hero,
+.hero section {
+  background: linear-gradient(
+    -45deg,
+    #1f1f1f,
+    #2d2d2d,
+    #1a1a1a,
+    #242424
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient for buttons & interactive elements */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6ee7ff, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+.btn-primary:hover {
+  animation: buttonHover 0.4s ease forwards;
+  box-shadow: 0 10px 30px rgba(110, 231, 255, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid #6ee7ff;
+  color: #6ee7ff;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(110, 231, 255, 0.1);
+  box-shadow: 0 0 20px rgba(110, 231, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/*--------------------------------------------------------------
+# Advanced Hover Effects for Interactive Elements
+--------------------------------------------------------------*/
+
+/* Glow effect on cards on hover */
+.card-like:hover {
+  animation: glowPulse 1.5s ease-in-out;
+}
+
+/* Link hover effects with underline animation */
+a:not([class]) {
+  position: relative;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+a:not([class])::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6ee7ff, #8b5cf6);
+  transition: width 0.3s ease;
+}
+
+a:not([class]):hover::after {
+  width: 100%;
+}
+
+/* Portfolio item hover effect with slight rotate */
+.portfolio-wrap {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-wrap:hover {
+  transform: translateY(-8px) rotate(0.5deg);
+  box-shadow: 0 20px 50px rgba(110, 231, 255, 0.3);
+}
+
+/* Service card glow on hover */
+.service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 30px rgba(110, 231, 255, 0.4), inset 0 0 20px rgba(110, 231, 255, 0.1);
+}
+
+/* Media card (video/audio) hover with brightness */
+.media-card {
+  transition: all 0.3s ease;
+  filter: brightness(1);
+}
+
+.media-card:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 40px rgba(110, 231, 255, 0.5);
+}
+
+/*--------------------------------------------------------------
+# Decorative CSS Shapes with Animations
+--------------------------------------------------------------*/
+
+/* Floating circle decorations */
+.shape-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: float 4s ease-in-out infinite;
+}
+
+.shape-circle-1 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #6ee7ff, transparent);
+  top: -100px;
+  right: -100px;
+  animation-delay: 0s;
+}
+
+.shape-circle-2 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #8b5cf6, transparent);
+  bottom: -50px;
+  left: -50px;
+  animation-delay: 1s;
+}
+
+.shape-circle-3 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #ec4899, transparent);
+  top: 50%;
+  left: -100px;
+  animation-delay: 2s;
+}
+
+/* Rotating triangle (CSS clip-path) */
+@keyframes rotateShape {
+  0% {
+    transform: rotate(0deg) translateY(-30px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(-30px);
+  }
+}
+
+.shape-rotating {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  clip-path: polygon(50% 0%, 100% 86%, 0% 86%);
+  background: linear-gradient(135deg, #6ee7ff, #8b5cf6);
+  opacity: 0.08;
+  animation: rotateShape 8s linear infinite;
+  pointer-events: none;
+}
+
+/* Animated decorative lines */
+@keyframes slideAcross {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.decorative-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #6ee7ff, transparent);
+  width: 200px;
+  animation: slideAcross 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.decorative-line:nth-child(1) {
+  top: 20%;
+  left: -200px;
+  animation-delay: 0s;
+}
+
+.decorative-line:nth-child(2) {
+  top: 40%;
+  left: -200px;
+  animation-delay: 1s;
+}
+
+.decorative-line:nth-child(3) {
+  top: 60%;
+  left: -200px;
+  animation-delay: 2s;
+}
+
+/*--------------------------------------------------------------
+# Accessibility: Respect prefers-reduced-motion
+--------------------------------------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations for users with motion sensitivity */
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Keep essential transitions but make them instant */
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    transition: none !important;
+  }
+
+  /* Disable hover animations */
+  .btn-primary:hover,
+  .btn-outline:hover,
+  .card-like:hover,
+  .service-card:hover,
+  .media-card:hover,
+  .portfolio-wrap:hover,
+  a:not([class]):hover::after {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Still allow visual feedback but without motion */
+  .btn-primary:hover {
+    filter: brightness(1.1);
+  }
+
+  .btn-outline:hover {
+    background: rgba(110, 231, 255, 0.15);
+  }
+
+  .card-like:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  }
+}

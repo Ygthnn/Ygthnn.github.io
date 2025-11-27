@@ -472,10 +472,6 @@
                 </div>
               </div>
             </div>
-            
-              </div>
-            </div>
-          </div>
 
           <!-- Right column with projects and education detail -->
           <div class="col-lg-8 ps-4 ps-lg-5">
@@ -673,7 +669,7 @@
             <div class="media-card position-relative z-1">
               <h3>What is Artificial Intelligence?</h3>
               <figure>
-                <video controls preload="metadata" width="50%" aria-label="Local demo video">
+                <video controls preload="metadata" style="width: 100%; max-width: 500px;" aria-label="Local demo video">
                   <source src="assets/media/demovideo.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -686,7 +682,7 @@
             <div class="media-card position-relative z-1">
               <h3>AI-Driven Therapist</h3>
               <div class="ratio ratio-16x9">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/eoCHC-Xx3KM?si=5WbHmXvuoNqiCth6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/eoCHC-Xx3KM?si=5WbHmXvuoNqiCth6" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
               <p class="small mt-2 mb-0">Check out this example of conversational AI with voice.</p>
             </div>
@@ -818,8 +814,10 @@
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+  <!-- Preloader with CSS-only spinner -->
+  <div id="preloader" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--background-color); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="preloader-spinner"></div>
+  </div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -835,6 +833,24 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Hide preloader when page loads -->
+  <script>
+    function hidePreloader() {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+        preloader.style.transition = 'opacity 0.6s ease, visibility 0.6s ease';
+      }
+    }
+
+    // Hide on page fully load
+    window.addEventListener('load', hidePreloader);
+    
+    // Backup: hide after 2 seconds if load event hasn't fired
+    setTimeout(hidePreloader, 2000);
+  </script>
 
 </body>
 
