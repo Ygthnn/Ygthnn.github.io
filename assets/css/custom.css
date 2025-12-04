@@ -207,119 +207,144 @@ h6 {
 # Navbar Restyle (appearance only)
 --------------------------------------------------------------*/
 
+/* ==========================================
+   FIXED SIDEBAR & LAYOUT (Use this version)
+   ========================================== */
+
+/* 1. Header (Sidebar) Settings */
 .header {
-  padding: 1.5rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 300px;
+  transition: all 0.5s;
+  z-index: 9997;
+  padding: 0 15px;
+  background: #040b14;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto; /* Scrollbar if menu is long */
 }
 
+/* 2. Header Container alignment */
 .header .header-container {
-  background: radial-gradient(circle at top left, #2b2b2b 0%, #161616 55%, #0b0b0b 100%);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
-  padding: 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* Vertical nav menu with pill-like items */
+/* 3. FORCE Main Content to move Right (Desktop/Laptop) */
+/* Trigger on screens wider than 992px (standard laptop size) */
+@media (min-width: 992px) {
+  #main,
+  .main, 
+  #footer,
+  footer {
+    margin-left: 300px !important; /* Force margin */
+    width: calc(100% - 300px) !important; /* Calculate remaining width */
+  }
+  
+  .header {
+    left: 0 !important; /* Keep header visible */
+  }
+}
+
+/* 4. Mobile Layout (Screens narrower than 992px) */
+@media (max-width: 991px) {
+  .header {
+    left: -300px; /* Hide sidebar off-screen */
+  }
+
+  /* When the mobile toggle is clicked */
+  .header.header-show {
+    left: 0;
+  }
+  
+  /* Reset content margin for mobile */
+  #main, .main, #footer {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Mobile Toggle Button Style */
+  .header-toggle {
+    color: #fff;
+    background-color: var(--accent-color); /* Uses your blue/purple color */
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    z-index: 9999;
+    border: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+}
+
+/* 5. Custom Scrollbar for Sidebar (Makes it look nicer) */
+.header::-webkit-scrollbar {
+  width: 7px;
+}
+.header::-webkit-scrollbar-track {
+  background: #040b14;
+}
+.header::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+}
+.header::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* 6. Navigation Link Styling */
+.navmenu {
+  width: 100%;
+  margin-top: 20px;
+}
 .navmenu ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
 }
-
 .navmenu a {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.9rem;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--nav-color);
-  position: relative;
-  overflow: hidden;
-  background: transparent;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  padding: 10px 15px;
+  color: #a8a9b4;
+  transition: 0.3s;
+  font-size: 15px;
+  border-radius: 4px;
 }
-
-/* Icon styling */
-.navmenu a .navicon {
-  font-size: 1.05rem;
-  opacity: 0.8;
+.navmenu a i {
+  font-size: 20px;
+  padding-right: 10px;
+  color: #a8a9b4;
 }
-
-/* Active / hover states with subtle pill highlight */
 .navmenu a:hover,
-.navmenu a.active {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  color: var(--nav-hover-color);
-  transform: translateX(2px);
+.navmenu .active,
+.navmenu li:hover > a {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.05);
 }
-
-.navmenu a:hover .navicon,
-.navmenu a.active .navicon {
-  opacity: 1;
+.navmenu a:hover i,
+.navmenu .active i {
+  color: var(--accent-color);
 }
-
-/* Animated accent bar on the left */
-.navmenu a::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border-left: 3px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.navmenu a.active::before,
-.navmenu a:hover::before {
-  border-left-color: color-mix(in srgb, var(--accent-color), transparent 25%);
-}
-
-/* Dropdown submenu styling (keeps functionality, changes look) */
-.navmenu .dropdown > a {
-  justify-content: space-between;
-}
-
-.navmenu .dropdown ul {
-  padding-left: 0;
-  margin-top: 0.4rem;
-  border-radius: 14px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.navmenu .dropdown ul li a {
-  padding: 0.5rem 0.9rem;
-  border-radius: 0;
-  font-size: 0.9rem;
-}
-
-.navmenu .dropdown ul li a:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Mobile nav: keep it readable and full-width */
-@media (max-width: 991px) {
-  .header .header-container {
-    border-radius: 0;
-    box-shadow: none;
-    background: var(--nav-mobile-background-color);
-  }
-
-  .navmenu ul {
-    gap: 0.2rem;
-  }
-
-  .navmenu a {
-    border-radius: 10px;
-  }
-}
-
 /*--------------------------------------------------------------
 # Progress Bars Restyle (Skills + Resume)
 --------------------------------------------------------------*/
@@ -1019,3 +1044,190 @@ a:not([class]):hover::after {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   }
 }
+
+/*--------------------------------------------------------------
+# Custom form result & notification styles
+--------------------------------------------------------------*/
+.form-results-container {
+  background-color: var(--surface-color);
+  border-radius: var(--card-radius);
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--surface-contrast);
+}
+
+.form-results-container .results-content h4 {
+  margin-top: 0;
+  margin-bottom: var(--space-2);
+}
+
+.form-results-container p {
+  margin: 0.25rem 0;
+  word-break: break-word;
+}
+
+.success-notification {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: linear-gradient(90deg, #6ee7ff, #8b5cf6);
+  color: #041018;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 99999;
+  font-weight: 700;
+}
+
+.success-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Form Results Box --- */
+.result-box {
+    background-color: var(--surface-color);
+    border: 1px solid var(--surface-contrast);
+    border-left: 4px solid var(--accent-color);
+    padding: 20px;
+    border-radius: var(--card-radius);
+    animation: fadeInUp 0.5s ease;
+}
+
+.result-box p {
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.result-box h4 {
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+/* --- Form Input Tweaks --- */
+.contact-form input, 
+.contact-form textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    margin-bottom: 0;
+}
+.contact-form input:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: none;
+}
+.contact-form .form-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Custom Success Popup --- */
+.custom-popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1f1f1f;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    border-left: 5px solid #28a745; /* Green Success Stripe */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 9999;
+    font-family: var(--default-font);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    /* Hidden state */
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.custom-popup i {
+    color: #28a745;
+    font-size: 1.2rem;
+}
+
+/* Visible state */
+.custom-popup.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+/* --- Form Styling Improvements --- */
+.contact-form {
+    background-color: var(--surface-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Make inputs visible and nice */
+.contact-form .form-control {
+    background-color: rgba(255, 255, 255, 0.07); /* Slightly lighter bg */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 12px 15px;
+    border-radius: 5px;
+    width: 100%; /* Ensure full width */
+}
+
+/* Input Focus Effect */
+.contact-form .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+/* Label Styling */
+.contact-form .form-label {
+    display: block; /* Forces label to be on its own line */
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Button Styling */
+.contact-form .btn-primary {
+    padding: 12px 40px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+/* --- Results Box Styling --- */
+.result-box {
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 5px solid var(--accent-color);
+    padding: 20px;
+    border-radius: 8px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.result-box h4 {
+    margin-bottom: 15px;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+.result-box p {
+    margin-bottom: 8px;
+    color: #ddd;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
