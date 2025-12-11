@@ -190,6 +190,7 @@ h6 {
 # Header / Navbar base
 --------------------------------------------------------------*/
 
+
 .header .header-container {
   border-radius: 10px;
   padding: 10px;
@@ -1231,3 +1232,208 @@ a:not([class]):hover::after {
     to { opacity: 1; transform: translateY(0); }
 }
 
+
+/*--------------------------------------------------------------
+# Memory Game Section
+--------------------------------------------------------------*/
+
+#memory-game {
+  background-color: #1d1d1d;
+}
+
+.memory-game-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Side panel (controls + stats) */
+.memory-side-panel {
+  min-width: 260px;
+  max-width: 320px;
+}
+
+/* Board wrapper */
+.memory-board-wrapper {
+  flex: 1 1 280px;
+}
+
+/* Game board grid */
+.memory-board {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Different layouts for difficulties */
+.memory-board-easy {
+  grid-template-columns: repeat(4, minmax(60px, 1fr));
+}
+
+.memory-board-hard {
+  grid-template-columns: repeat(6, minmax(50px, 1fr));
+}
+
+/* Card base */
+.memory-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  perspective: 800px;
+}
+
+.memory-card.disabled {
+  pointer-events: none;
+}
+
+/* Inner element for 3D flip */
+.memory-card-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  background: var(--surface-color);
+  border: 1px solid var(--surface-contrast);
+  box-shadow: var(--card-shadow);
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 0.4s ease;
+}
+
+/* Front & back faces */
+.memory-card-front,
+.memory-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+/* Front: hidden side */
+.memory-card-front {
+  background: linear-gradient(135deg, #272727, #1a1a1a);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Back: revealed symbol */
+.memory-card-back {
+  transform: rotateY(180deg);
+  background: radial-gradient(circle at top, #6ee7ff 0%, #0d1015 55%);
+}
+
+/* Flipped state */
+.memory-card.flipped .memory-card-inner,
+.memory-card.matched .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Matched cards: slightly dim and not clickable */
+.memory-card.matched .memory-card-back {
+  filter: grayscale(0.2) brightness(0.9);
+  box-shadow: 0 0 0 2px rgba(110, 231, 255, 0.4);
+}
+
+.memory-card.matched {
+  cursor: default;
+}
+
+/* Win message */
+.memory-win {
+  min-height: 1.2rem;
+  font-weight: 600;
+  color: #6ee7ff;
+}
+
+/* Timer styling */
+#memoryTimer {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Best stats */
+#memoryBestEasy,
+#memoryBestHard {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .memory-game-wrapper {
+    flex-direction: column;
+  }
+
+  .memory-side-panel,
+  .memory-board-wrapper {
+    width: 100%;
+  }
+}
+/* Push main content to the right so sidebar does not overlap */
+@media (min-width: 992px) {
+  .main {
+    margin-left: 260px; /* adjust to your header width */
+  }
+
+  #footer {
+    margin-left: 260px; 
+  }
+}
+
+.header {
+  width: 260px; 
+  position: fixed;
+  height: 100vh;
+}
+
+/* --------------------------------------------------------------
+   Portfolio grid: 3 cards per row on desktop using CSS Grid
+-------------------------------------------------------------- */
+
+/* Base: stack on mobile */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* 2 columns on tablet */
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 3 columns on desktop */
+@media (min-width: 992px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Column wrapper no longer needs flex sizing */
+.portfolio-item-col {
+  width: 100%;
+}
+
+/* Card + image sizing */
+.portfolio-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-img {
+  width: 100%;
+  max-height: 220px;   /* adjust if you want smaller */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.portfolio .portfolio-info {
+  margin-top: 0.75rem;
+}
+
+.portfolio .portfolio-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
